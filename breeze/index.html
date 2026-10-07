@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Breeze, the Mac cleaner for developers</title>
+  <meta name="description" content="Breeze finds caches, old Xcode builds, node_modules, large files and app leftovers on your Mac, shows you exactly what they are, and clears them when you say so.">
+  <meta property="og:title" content="Breeze, the Mac cleaner for developers">
+  <meta property="og:description" content="Clear caches, Xcode builds, node_modules and app leftovers. Native for macOS. Free to try.">
+  <meta property="og:image" content="https://nanket.github.io/breeze/img/home.jpg">
+  <link rel="icon" href="img/favicon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="site.css">
+  <style>
+    .hero { padding: 48px 0 28px; }
+    .hero h1 {
+      margin: 0; max-width: 15ch;
+      font-size: clamp(2.6rem, 7vw, 5.4rem); line-height: .98; letter-spacing: -.035em; font-weight: 800;
+    }
+    .hero p.lead { max-width: 56ch; margin: 24px 0 30px; font-size: 1.18rem; color: var(--dim); }
+    .actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 26px;
+      border-radius: 999px; font-weight: 700; font-size: 1.02rem; text-decoration: none;
+    }
+    .btn.primary { color: #12101f; background: linear-gradient(90deg, var(--mint), var(--sky)); }
+    .btn.ghost { color: var(--mist); border: 1.5px solid var(--line); }
+    .btn.ghost:hover { border-color: var(--dim); }
+    .fine { margin-top: 14px; font-size: .92rem; color: var(--dim); }
+
+    /* The one moving thing: the disk meter */
+    .meter { margin: 56px 0 18px; }
+    .meter-head { display: flex; justify-content: space-between; align-items: baseline; gap: 16px; margin-bottom: 12px; }
+    .meter-head .disk { font-weight: 700; }
+    .meter-head .free { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+    .meter-head .free small { font-size: .5em; font-weight: 500; color: var(--dim); letter-spacing: 0; }
+    .bar { position: relative; height: 34px; border-radius: 12px; background: #2b2347; overflow: hidden; display: flex; }
+    .bar .used { width: 86.7%; background: #5a4d86; }
+    .bar .junk {
+      width: 2.24%; background: linear-gradient(90deg, var(--orchid), var(--rose));
+      transform-origin: left; transition: width 1.4s cubic-bezier(.6,0,.2,1) .7s, opacity .6s ease 1.9s;
+    }
+    .meter.cleaned .bar .junk { width: 0; opacity: 0; }
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 22px; margin-top: 12px; font-size: .93rem; color: var(--dim); }
+    .legend i { display: inline-block; width: 11px; height: 11px; border-radius: 3px; margin-right: 7px; vertical-align: -1px; }
+    .legend .k-used { background: #5a4d86; }
+    .legend .k-junk { background: linear-gradient(90deg, var(--orchid), var(--rose)); }
+    .legend .k-free { background: #2b2347; outline: 1px solid var(--line); }
+
+    .shots { padding: 40px 0 10px; }
+    .shots figure { margin: 0; }
+    .shots img { display: block; width: 100%; height: auto; border-radius: 14px; border: 1px solid var(--line); }
+    .shots .main { margin-bottom: 18px; }
+    .shots .pair { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .shots figcaption { margin-top: 10px; font-size: .92rem; color: var(--dim); }
+
+    section.block { padding: 72px 0 8px; }
+    section.block > h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 10px; max-width: 22ch; }
+    section.block > p.intro { color: var(--dim); max-width: 60ch; margin: 0 0 36px; }
+
+    .groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 34px 40px; }
+    .group h3 { margin: 0 0 10px; font-size: 1.12rem; padding-bottom: 10px; border-bottom: 2px solid var(--c); }
+    .group ul { list-style: none; padding: 0; margin: 0; }
+    .group li { padding: 7px 0; color: var(--dim); }
+    .group li b { color: var(--mist); font-weight: 700; }
+
+    .safety { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 26px 40px; }
+    .safety h3 { margin: 0 0 6px; font-size: 1.08rem; }
+    .safety p { margin: 0; color: var(--dim); }
+
+    .plans { display: grid; grid-template-columns: 1fr 1.15fr; gap: 20px; align-items: stretch; max-width: 900px; }
+    .plan { padding: 30px; border-radius: var(--radius-lg); border: 1px solid var(--line); }
+    .plan.pro { background: var(--night-2); border: 1.5px solid var(--orchid); }
+    .plan h3 { margin: 0; font-size: 1.3rem; }
+    .plan .price { font-size: 2.6rem; font-weight: 800; letter-spacing: -.02em; margin: 10px 0 2px; }
+    .plan .price small { font-size: 1rem; font-weight: 500; color: var(--dim); }
+    .plan ul { padding-left: 1.1em; margin: 18px 0 26px; color: var(--dim); }
+    .plan li { margin: 6px 0; }
+
+    .faq { max-width: 760px; }
+    .faq details { border-bottom: 1px solid var(--line); padding: 18px 0; }
+    .faq summary { cursor: pointer; font-weight: 700; font-size: 1.08rem; list-style: none; }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after { content: "+"; float: right; color: var(--dim); font-weight: 500; }
+    .faq details[open] summary::after { content: "–"; }
+    .faq details p { color: var(--dim); margin: 10px 0 0; }
+
+    .closing { padding: 90px 0 70px; }
+    .closing h2 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 22px; letter-spacing: -.02em; }
+
+    @media (max-width: 700px) {
+      .top nav a.hide-sm { display: none; }
+      .shots .pair { grid-template-columns: 1fr; }
+      .plans { grid-template-columns: 1fr; }
+      .meter-head { flex-direction: column; gap: 2px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .bar .junk { transition: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="wrap top">
+    <a class="brand" href="./"><img src="img/icon.png" alt="" width="34" height="34">Breeze</a>
+    <nav aria-label="Main">
+      <a class="hide-sm" href="#features">Features</a>
+      <a class="hide-sm" href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="wrap hero">
+      <h1>The Mac cleaner that knows what node_modules is.</h1>
+      <p class="lead">Breeze finds caches, old Xcode builds, forgotten downloads and the files apps leave behind. It shows you exactly what each one is and clears it only when you say so. Native to macOS, fast, and careful by default.</p>
+      <div class="actions">
+        <a class="btn primary" href="Breeze-1.3.dmg">Download Breeze free</a>
+        <a class="btn ghost" href="https://aniketpure.gumroad.com/l/breeze">Buy Pro for ₹499</a>
+      </div>
+      <p class="fine">Free for your first 1 GB of cleaning. Requires macOS 14 Sonoma or later.</p>
+
+      <div class="meter" id="meter" aria-label="Example: free space on a Mac Studio before and after cleaning">
+        <div class="meter-head">
+          <span class="disk">Macintosh HD, 494 GB</span>
+          <span class="free"><span id="free">54.6</span> GB <small>free</small></span>
+        </div>
+        <div class="bar" role="img" aria-label="11.1 GB of junk and browser cache cleared, free space grows from 54.6 GB to 65.7 GB">
+          <div class="used"></div><div class="junk"></div>
+        </div>
+        <div class="legend">
+          <span><i class="k-used"></i>Your files and apps</span>
+          <span><i class="k-junk"></i>11.1 GB Breeze found: system junk and browser caches</span>
+          <span><i class="k-free"></i>Free space</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap shots" aria-label="Screenshots">
+      <figure class="main">
+        <img src="img/home.jpg" alt="Breeze home screen showing Mac health score, storage, memory, CPU and uptime, with a Scan button" width="1200" height="780">
+        <figcaption>Mac health, storage, memory and CPU at a glance. One Scan button checks everything.</figcaption>
+      </figure>
+      <div class="pair">
+        <figure>
+          <img src="img/updater.jpg" alt="Breeze Updater listing outdated apps from Homebrew and developer update feeds" width="1200" height="780" loading="lazy">
+          <figcaption>The Updater finds outdated apps, Homebrew casks included.</figcaption>
+        </figure>
+        <figure>
+          <img src="img/privacy.jpg" alt="Breeze Privacy screen listing cache, history and cookies for Safari, Chrome, Brave and Edge" width="1200" height="780" loading="lazy">
+          <figcaption>Privacy cleaning for every browser, with only caches selected by default.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="wrap block" id="features">
+      <h2>Thirteen tools, organised the way you think about your Mac.</h2>
+      <p class="intro">Every scan is free and read-only. Nothing changes on your Mac until you review the list and press Clean.</p>
+      <div class="groups">
+        <div class="group" style="--c: var(--orchid)">
+          <h3>Cleanup</h3>
+          <ul>
+            <li><b>Smart Scan</b> checks junk, large files and unused apps in one pass.</li>
+            <li><b>System Junk</b> clears caches, logs, Xcode DerivedData, simulator caches and old archives.</li>
+            <li><b>Dev Cleanup</b> finds node_modules, Pods, Gradle and Flutter builds, Python venvs, Rust targets and more, and flags the ones you haven't touched in 30 days.</li>
+          </ul>
+        </div>
+        <div class="group" style="--c: var(--sky)">
+          <h3>Files</h3>
+          <ul>
+            <li><b>Large &amp; Old Files</b> surfaces the videos, disk images and archives taking up room.</li>
+            <li><b>Duplicates</b> compares file contents, not just names.</li>
+            <li><b>Space Lens</b> draws your disk as an animated orbit you can click into.</li>
+            <li><b>Organizer</b> sorts a messy folder by type or month, with undo.</li>
+          </ul>
+        </div>
+        <div class="group" style="--c: var(--mint)">
+          <h3>Protection</h3>
+          <ul>
+            <li><b>Security Check</b> confirms Gatekeeper, FileVault, the firewall and XProtect are on, and flags unsigned apps and known adware.</li>
+            <li><b>Privacy</b> clears browser caches, history and cookies for Safari, Chrome, Brave, Edge, Arc, Vivaldi and Firefox.</li>
+          </ul>
+        </div>
+        <div class="group" style="--c: var(--rose)">
+          <h3>Applications</h3>
+          <ul>
+            <li><b>Uninstaller</b> removes apps along with the preferences and caches they leave behind.</li>
+            <li><b>Updater</b> checks each app's own update feed, Homebrew and the App Store.</li>
+          </ul>
+        </div>
+        <div class="group" style="--c: #ffb547">
+          <h3>Speed</h3>
+          <ul>
+            <li><b>Launch Agents</b> lets you switch off the background helpers that start with your Mac.</li>
+            <li><b>Maintenance</b> runs the routine fixes: flush DNS, reindex Spotlight, thin Time Machine snapshots and more.</li>
+            <li><b>Menu bar monitor</b> and a warning when your disk runs low.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap block">
+      <h2>Careful with your files.</h2>
+      <p class="intro">Cleaning tools earn trust slowly. Breeze is built so that a wrong click can't cost you anything important.</p>
+      <div class="safety">
+        <div><h3>You approve every item</h3><p>Scans only read. You see each file, its size and what it's for before anything is removed.</p></div>
+        <div><h3>The Trash comes first</h3><p>Documents, apps and duplicates go to the Trash, so you can put them back. Only rebuildable caches and logs are deleted outright.</p></div>
+        <div><h3>System folders are off limits</h3><p>A built-in guard refuses to touch macOS system folders, your Keychains, SSH keys or iCloud Drive, whatever a scan finds.</p></div>
+        <div><h3>A history of every clean</h3><p>Breeze logs what it removed and when, so you can always check what happened.</p></div>
+      </div>
+    </section>
+
+    <section class="wrap block" id="pricing">
+      <h2>Try it free. Pay once if it helps.</h2>
+      <p class="intro">No subscription and no account. Your license key is checked with Gumroad, and nothing else leaves your Mac.</p>
+      <div class="plans">
+        <div class="plan">
+          <h3>Free</h3>
+          <div class="price">₹0</div>
+          <ul>
+            <li>Every scan and every tool</li>
+            <li>Clean up to 1 GB in total</li>
+            <li>Security Check, Updater and Maintenance with no limits</li>
+          </ul>
+          <a class="btn ghost" href="Breeze-1.3.dmg">Download free</a>
+        </div>
+        <div class="plan pro">
+          <h3>Breeze Pro</h3>
+          <div class="price">₹499 <small>one time</small></div>
+          <ul>
+            <li>Unlimited cleaning</li>
+            <li>Use it on up to 3 of your Macs</li>
+            <li>Free updates for all of version 1</li>
+            <li>Email support from the developer</li>
+          </ul>
+          <a class="btn primary" href="https://aniketpure.gumroad.com/l/breeze">Buy Pro on Gumroad</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="wrap block" id="faq">
+      <h2>Questions</h2>
+      <div class="faq">
+        <details>
+          <summary>How do I activate Pro?</summary>
+          <p>After you buy, Gumroad emails you a license key. Open Breeze, click Go Pro at the bottom of the sidebar, paste the key and click Activate. To move it to another Mac, click Deactivate in Settings first.</p>
+        </details>
+        <details>
+          <summary>Why does Breeze ask for Full Disk Access?</summary>
+          <p>macOS hides some caches, Safari data and Mail downloads from apps unless you allow it. Breeze works without it, but scans will miss those places. You can turn it on from the lock icon at the bottom of the sidebar.</p>
+        </details>
+        <details>
+          <summary>Does Breeze collect any data?</summary>
+          <p>No. There's no analytics or tracking. The only network requests are the license check with Gumroad and a daily check for a new version. Read the <a href="privacy.html">privacy policy</a>.</p>
+        </details>
+        <details>
+          <summary>Is Breeze signed and notarized by Apple?</summary>
+          <p>Yes. Breeze is signed with a Developer ID and notarized by Apple, so it opens normally without security warnings.</p>
+        </details>
+        <details>
+          <summary>Can I get a refund?</summary>
+          <p>Yes. Email within 14 days of buying and you'll get a full refund through Gumroad.</p>
+        </details>
+        <details>
+          <summary>Which Macs does it run on?</summary>
+          <p>Any Mac with macOS 14 Sonoma or later, Apple silicon or Intel.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="wrap closing">
+      <h2>See what's filling your Mac.</h2>
+      <div class="actions">
+        <a class="btn primary" href="Breeze-1.3.dmg">Download Breeze free</a>
+        <a class="btn ghost" href="https://aniketpure.gumroad.com/l/breeze">Buy Pro for ₹499</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site">
+    <div class="wrap">
+      <span>© 2026 Aniket Nagapure</span>
+      <nav aria-label="Legal">
+        <a href="privacy.html">Privacy</a>
+        <a href="terms.html">Terms</a>
+        <a href="mailto:aniketvnagapure@gmail.com?subject=Breeze">Contact support</a>
+      </nav>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      var meter = document.getElementById('meter');
+      var free = document.getElementById('free');
+      var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var from = 54.6, to = 65.7;
+      function run() {
+        meter.classList.add('cleaned');
+        if (reduce) { free.textContent = to.toFixed(1); return; }
+        var start = null, delay = 700, dur = 1400;
+        function step(t) {
+          if (start === null) start = t;
+          var p = Math.min(Math.max((t - start - delay) / dur, 0), 1);
+          var e = p < .5 ? 2 * p * p : 1 - Math.pow(-2 * p + 2, 2) / 2;
+          free.textContent = (from + (to - from) * e).toFixed(1);
+          if (p < 1) requestAnimationFrame(step);
+        }
+        requestAnimationFrame(step);
+      }
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (es) {
+          if (es[0].isIntersecting) { io.disconnect(); run(); }
+        }, { threshold: .4 });
+        io.observe(meter);
+      } else { run(); }
+    })();
+  </script>
+</body>
+</html>
