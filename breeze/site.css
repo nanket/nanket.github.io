@@ -1,0 +1,44 @@
+:root {
+  --night: #17122b;
+  --night-2: #211a3b;
+  --line: #3a3159;
+  --mist: #ece8f7;
+  --dim: #b2a9cf;
+  --mint: #2ee6a8;
+  --sky: #4fc3f7;
+  --orchid: #c86bfa;
+  --rose: #ff5e9a;
+  --radius-lg: 22px;
+  --radius-sm: 10px;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--night);
+  color: var(--mist);
+  font: 17px/1.6 "Schibsted Grotesk", system-ui, -apple-system, sans-serif;
+}
+a { color: var(--sky); text-underline-offset: 3px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; border-radius: 6px; }
+.wrap { width: min(1120px, calc(100% - 32px)); margin: 0 auto; }
+.top { display: flex; align-items: center; justify-content: space-between; padding: 22px 0; }
+.brand { display: flex; align-items: center; gap: 10px; color: var(--mist); text-decoration: none; font-weight: 700; font-size: 1.15rem; }
+.brand img { width: 34px; height: 34px; }
+.top nav { display: flex; gap: 22px; font-size: .95rem; }
+.top nav a { color: var(--dim); text-decoration: none; }
+.top nav a:hover { color: var(--mist); }
+
+/* Legal pages */
+.doc { max-width: 720px; margin: 40px auto 80px; }
+.doc h1 { font-size: clamp(2rem, 5vw, 2.8rem); line-height: 1.1; letter-spacing: -.02em; margin: 0 0 6px; }
+.doc h2 { font-size: 1.25rem; margin: 36px 0 8px; }
+.doc p, .doc li { color: var(--dim); }
+.doc strong { color: var(--mist); }
+.doc .updated { color: var(--dim); font-size: .95rem; margin-bottom: 30px; }
+.doc code { background: var(--night-2); padding: 1px 6px; border-radius: 6px; font-size: .9em; }
+
+footer.site { border-top: 1px solid var(--line); padding: 28px 0 48px; color: var(--dim); font-size: .92rem; }
+footer.site .wrap { display: flex; flex-wrap: wrap; gap: 14px 26px; justify-content: space-between; }
+footer.site nav { display: flex; flex-wrap: wrap; gap: 20px; }
+footer.site a { color: var(--dim); }
