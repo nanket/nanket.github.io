@@ -106,7 +106,7 @@
     <a class="brand" href="./"><img src="img/icon.png" alt="" width="34" height="34">Breeze</a>
     <nav aria-label="Main">
       <a class="hide-sm" href="#features">Features</a>
-      <a class="hide-sm" href="#pricing">Pricing</a>
+      <a class="hide-sm" href="#open-source">Open source</a>
       <a href="#faq">FAQ</a>
     </nav>
   </header>
@@ -116,10 +116,10 @@
       <h1>The Mac cleaner that knows what node_modules is.</h1>
       <p class="lead">Breeze finds caches, old Xcode builds, forgotten downloads and the files apps leave behind. It shows you exactly what each one is and clears it only when you say so. Native to macOS, fast, and careful by default.</p>
       <div class="actions">
-        <a class="btn primary" href="Breeze-1.3.dmg">Download Breeze free</a>
-        <a class="btn ghost" href="https://aniketpure.gumroad.com/l/breeze">Buy Pro for ₹499</a>
+        <a class="btn primary" href="Breeze-1.4.zip">Download Breeze free</a>
+        <a class="btn ghost" href="https://github.com/nanket/breeze">View source on GitHub</a>
       </div>
-      <p class="fine">Free for your first 1 GB of cleaning. Requires macOS 14 Sonoma or later.</p>
+      <p class="fine">Free and open source, with no limits. Requires macOS 14 Sonoma or later.</p>
 
       <div class="meter" id="meter" aria-label="Example: free space on a Mac Studio before and after cleaning">
         <div class="meter-head">
@@ -148,7 +148,7 @@
           <figcaption>The Updater finds outdated apps, Homebrew casks included.</figcaption>
         </figure>
         <figure>
-          <img src="img/privacy.jpg" alt="Breeze Privacy screen listing cache, history and cookies for Safari, Chrome, Brave and Edge" width="1200" height="780" loading="lazy">
+          <img src="img/privacy.jpg" alt="Breeze Privacy screen listing cache, history and cookies for Safari, Chrome and Brave" width="1200" height="780" loading="lazy">
           <figcaption>Privacy cleaning for every browser, with only caches selected by default.</figcaption>
         </figure>
       </div>
@@ -211,30 +211,31 @@
       </div>
     </section>
 
-    <section class="wrap block" id="pricing">
-      <h2>Try it free. Pay once if it helps.</h2>
-      <p class="intro">No subscription and no account. Your license key is checked with Gumroad, and nothing else leaves your Mac.</p>
+    <section class="wrap block" id="open-source">
+      <h2>Free. Open source. No catch.</h2>
+      <p class="intro">No subscription, no account and no cleaning limit. The code is public, so you can check exactly what Breeze does before it touches a file.</p>
       <div class="plans">
         <div class="plan">
-          <h3>Free</h3>
+          <h3>Download</h3>
           <div class="price">₹0</div>
           <ul>
-            <li>Every scan and every tool</li>
-            <li>Clean up to 1 GB in total</li>
-            <li>Security Check, Updater and Maintenance with no limits</li>
+            <li>Every tool, with unlimited cleaning</li>
+            <li>Signed and notarized by Apple</li>
+            <li>Apple silicon and Intel</li>
+            <li>Updates included</li>
           </ul>
-          <a class="btn ghost" href="Breeze-1.3.dmg">Download free</a>
+          <a class="btn primary" href="Breeze-1.4.zip">Download Breeze free</a>
         </div>
         <div class="plan pro">
-          <h3>Breeze Pro</h3>
-          <div class="price">₹499 <small>one time</small></div>
+          <h3>Source code</h3>
+          <div class="price">GPL-3.0</div>
           <ul>
-            <li>Unlimited cleaning</li>
-            <li>Use it on up to 3 of your Macs</li>
-            <li>Free updates for all of version 1</li>
-            <li>Email support from the developer</li>
+            <li>Read every line that deletes a file</li>
+            <li>Build it yourself with Xcode or <code>./build.sh</code></li>
+            <li>Bug reports and pull requests welcome</li>
+            <li>Like it? <a href="https://aniketpure.gumroad.com/l/breeze">Leave a tip</a> or star the repo</li>
           </ul>
-          <a class="btn primary" href="https://aniketpure.gumroad.com/l/breeze">Buy Pro on Gumroad</a>
+          <a class="btn ghost" href="https://github.com/nanket/breeze">View on GitHub</a>
         </div>
       </div>
     </section>
@@ -243,8 +244,8 @@
       <h2>Questions</h2>
       <div class="faq">
         <details>
-          <summary>How do I activate Pro?</summary>
-          <p>After you buy, Gumroad emails you a license key. Open Breeze, click Go Pro at the bottom of the sidebar, paste the key and click Activate. To move it to another Mac, click Deactivate in Settings first.</p>
+          <summary>Is it really free?</summary>
+          <p>Yes. Every tool works with no cleaning limit and no account. Breeze is open source under the GPL-3.0. If it helps you, you can <a href="https://aniketpure.gumroad.com/l/breeze">leave a tip</a>, but a tip doesn't unlock anything.</p>
         </details>
         <details>
           <summary>Why does Breeze ask for Full Disk Access?</summary>
@@ -252,15 +253,15 @@
         </details>
         <details>
           <summary>Does Breeze collect any data?</summary>
-          <p>No. There's no analytics or tracking. The only network requests are the license check with Gumroad and a daily check for a new version. Read the <a href="privacy.html">privacy policy</a>.</p>
+          <p>No. There's no analytics or tracking. The only network requests are a daily check for a new version and, when you open the Updater, each app's own update feed. The code is public, so you can check. Read the <a href="privacy.html">privacy policy</a>.</p>
         </details>
         <details>
           <summary>Is Breeze signed and notarized by Apple?</summary>
           <p>Yes. Breeze is signed with a Developer ID and notarized by Apple, so it opens normally without security warnings.</p>
         </details>
         <details>
-          <summary>Can I get a refund?</summary>
-          <p>Yes. Email within 14 days of buying and you'll get a full refund through Gumroad.</p>
+          <summary>Can I build it myself?</summary>
+          <p>Yes. Clone the repo and run <code>./build.sh</code> on an Apple silicon Mac, or open <code>Breeze.xcodeproj</code> in Xcode. The README has the details.</p>
         </details>
         <details>
           <summary>Which Macs does it run on?</summary>
@@ -272,8 +273,8 @@
     <section class="wrap closing">
       <h2>See what's filling your Mac.</h2>
       <div class="actions">
-        <a class="btn primary" href="Breeze-1.3.dmg">Download Breeze free</a>
-        <a class="btn ghost" href="https://aniketpure.gumroad.com/l/breeze">Buy Pro for ₹499</a>
+        <a class="btn primary" href="Breeze-1.4.zip">Download Breeze free</a>
+        <a class="btn ghost" href="https://github.com/nanket/breeze">View source on GitHub</a>
       </div>
     </section>
   </main>
