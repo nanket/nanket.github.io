@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Help and support for Kosha: Private Vault: forgotten pattern, recovery story, switching iPhones, Kosha Pro and contact.">
+  <title>Kosha Help &amp; Support</title>
+  <style>
+    :root { color-scheme: light dark; --bg:#f2f2f7; --card:#fff; --ink:#1c1c1e; --muted:#6c6c70; --line:#e5e5ea; --accent:#007aff; }
+    @media (prefers-color-scheme: dark) { :root { --bg:#000; --card:#1c1c1e; --ink:#f2f2f7; --muted:#98989f; --line:#38383a; --accent:#0a84ff; } }
+    * { box-sizing:border-box; }
+    body { margin:0; background:var(--bg); color:var(--ink); font:17px/1.55 -apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",system-ui,sans-serif; -webkit-text-size-adjust:100%; }
+    main { width:min(720px, calc(100% - 32px)); margin:48px auto 64px; }
+    header { display:flex; align-items:center; gap:14px; margin-bottom:28px; }
+    .mark { width:52px; height:52px; border-radius:12px; background:var(--accent); display:grid; place-items:center; flex:none; }
+    .mark svg { width:28px; height:28px; }
+    h1 { margin:0; font-size:clamp(1.9rem, 6vw, 2.5rem); line-height:1.1; letter-spacing:-.02em; }
+    .sub { margin:4px 0 0; color:var(--muted); font-size:.95rem; }
+    .contact { background:var(--card); border-radius:14px; padding:20px 22px; margin:0 0 22px; }
+    .contact p { margin:0; }
+    .contact a.button { display:inline-block; margin-top:12px; padding:10px 18px; border-radius:999px; background:var(--accent); color:#fff; font-weight:600; }
+    h2 { margin:26px 0 8px 4px; font-size:.8rem; font-weight:600; letter-spacing:.04em; text-transform:uppercase; color:var(--muted); }
+    .group { background:var(--card); border-radius:14px; overflow:hidden; }
+    details { border-top:1px solid var(--line); }
+    details:first-child { border-top:0; }
+    summary { cursor:pointer; list-style:none; padding:15px 44px 15px 22px; position:relative; font-weight:600; }
+    summary::-webkit-details-marker { display:none; }
+    summary::after { content:""; position:absolute; right:22px; top:50%; width:8px; height:8px; border-right:2px solid var(--muted); border-bottom:2px solid var(--muted); transform:translateY(-70%) rotate(45deg); transition:transform .2s; }
+    details[open] summary::after { transform:translateY(-30%) rotate(225deg); }
+    .answer { padding:0 22px 16px; }
+    .answer p { margin:0 0 8px; }
+    a { color:var(--accent); text-decoration:none; }
+    a:hover { text-decoration:underline; }
+    footer { margin-top:28px; color:var(--muted); font-size:.9rem; text-align:center; }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <div class="mark" aria-hidden="true"><svg viewBox="0 0 24 24" fill="#fff"><path d="M12 2a5 5 0 0 0-5 5v3H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8a2 2 0 0 0-2-2h-1V7a5 5 0 0 0-5-5Zm-3 8V7a3 3 0 0 1 6 0v3H9Z"/></svg></div>
+      <div>
+        <h1>Kosha Help &amp; Support</h1>
+        <p class="sub">Kosha: Private Vault for iPhone</p>
+      </div>
+    </header>
+
+    <div class="contact">
+      <p>Something not working, or a question that isn't answered below? Email us and we'll get back to you. Please don't send your recovery story or anything from your vault: we never need it.</p>
+      <a class="button" href="mailto:nanket.dev@gmail.com?subject=Kosha%20support">Email Support</a>
+    </div>
+
+    <h2>Getting in</h2>
+    <div class="group">
+      <details>
+        <summary>I forgot my pattern</summary>
+        <div class="answer">
+          <p>On the unlock screen, tap <strong>Forgot Pattern?</strong> and fill in the 9 key words of your recovery story. You'll then set a new pattern.</p>
+          <p>Without the pattern or the story, nobody can open the vault, including us. There's no reset email because there's no account.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Where do I find my recovery story?</summary>
+        <div class="answer">
+          <p>Open the <strong>Protect</strong> tab and tap <strong>Recovery Story</strong>. Kosha asks for your pattern first. Write the sentence down and keep it somewhere safe, away from your iPhone.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How do I turn on Face ID?</summary>
+        <div class="answer">
+          <p>In <strong>Protect › Unlock</strong>, turn on Face ID. After your iPhone restarts, Kosha asks for your pattern once before Face ID works again.</p>
+        </div>
+      </details>
+    </div>
+
+    <h2>Your vault</h2>
+    <div class="group">
+      <details>
+        <summary>Is my vault backed up? What happens if I get a new iPhone?</summary>
+        <div class="answer">
+          <p>Not yet. Your vault lives only on this iPhone, and it isn't included in iCloud or computer backups, so it doesn't move to a new iPhone and can't be restored if the phone is lost or erased.</p>
+          <p>Before you switch, reset or hand in your iPhone, open each item you want to keep and tap <strong>Export</strong> or <strong>Share</strong>. Don't delete the originals of anything you can't replace.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Can you recover my files?</summary>
+        <div class="answer">
+          <p>No. Your files and keys never leave your iPhone, so we have nothing to recover from. That's what keeps them private.</p>
+        </div>
+      </details>
+      <details>
+        <summary>Search or smart albums aren't finding things</summary>
+        <div class="answer">
+          <p>Kosha reads new items in the background on your iPhone. <strong>Protect › Smart Search</strong> shows how far it has got. Search and smart albums work in English for now.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How do I delete everything?</summary>
+        <div class="answer">
+          <p>Open <strong>Protect</strong> and tap <strong>Delete Everything</strong>. Every vault on the iPhone is erased and can't be opened again. Deleting the app does the same.</p>
+        </div>
+      </details>
+    </div>
+
+    <h2>Kosha Pro</h2>
+    <div class="group">
+      <details>
+        <summary>What does Pro add?</summary>
+        <div class="answer">
+          <p>Kosha is free for up to 100 items. Pro removes the limit. If Pro ends, nothing is locked: every item stays viewable, exportable and deletable.</p>
+        </div>
+      </details>
+      <details>
+        <summary>I bought Pro but it isn't showing</summary>
+        <div class="answer">
+          <p>Make sure you're signed in with the same Apple Account, then open <strong>Protect</strong> and tap <strong>Restore Purchases</strong>.</p>
+        </div>
+      </details>
+      <details>
+        <summary>How do I cancel or get a refund?</summary>
+        <div class="answer">
+          <p>Subscriptions are managed by Apple: open <strong>Settings › your name › Subscriptions</strong> on your iPhone, or <a href="https://apps.apple.com/account/subscriptions">manage them here</a>. Cancel at least 24 hours before the period ends to avoid the next charge.</p>
+          <p>Refunds are handled by Apple at <a href="https://reportaproblem.apple.com">reportaproblem.apple.com</a>.</p>
+        </div>
+      </details>
+    </div>
+
+    <footer>Kosha · Published by Nanket · <a href="../privacy/">Privacy Policy</a></footer>
+  </main>
+</body>
+</html>
